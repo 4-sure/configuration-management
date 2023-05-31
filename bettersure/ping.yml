@@ -1,0 +1,6 @@
+---
+- name: Ping Test
+  hosts: appserver
+  tasks:
+  - name: Ping the host
+    ping:

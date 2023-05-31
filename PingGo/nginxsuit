@@ -1,0 +1,128 @@
+---
+- name: Install web stack
+  hosts: all
+  become: true
+  
+  tasks:
+  - name: Install dependencies
+    apt:
+      name:
+        - build-essential
+        - libssl-dev
+        - libffi-dev
+        - python3-dev
+        - python3-pip
+        - python3-setuptools
+        - python3-venv
+        - python3-wheel
+        - postgresql-client
+        - postgresql-contrib
+        - nginx
+        - redis-server
+        - docker.io
+        - docker-compose
+      state: present
+      update_cache: true
+      
+  - name: Create virtual environment
+    shell: python3 -m venv /opt/myenv
+    args:
+      executable: /bin/bash
+      
+  - name: Activate virtual environment
+    shell: source /opt/myenv/bin/activate
+    args:
+      executable: /bin/bash
+      
+  - name: Install Python packages
+    pip:
+      name:
+        - django
+        - gunicorn
+        - psycopg2-binary
+        - pgbouncer
+        - redis
+      virtualenv: /opt/myenv
+      
+  - name: Configure Postgres
+    become_user: postgres
+    postgresql_user:
+      name: myuser
+      password: mypassword
+    postgresql_db:
+      name: mydb
+      owner: myuser
+      encoding: UTF8
+      lc_collate: en_US.UTF-8
+      lc_ctype: en_US.UTF-8
+      
+  - name: Configure PGBouncer
+    copy:
+      src: pgbouncer.ini
+      dest: /etc/pgbouncer/pgbouncer.ini
+      mode: '0644'
+    notify:
+      - Restart PGBouncer
+      
+  - name: Restart PGBouncer
+    service:
+      name: pgbouncer
+      state: restarted
+      
+  - name: Configure Gunicorn
+    copy:
+      src: gunicorn.service
+      dest: /etc/systemd/system/gunicorn.service
+      mode: '0644'
+    notify:
+      - Reload systemd
+      
+  - name: Reload systemd
+    systemd:
+      daemon_reload: yes
+      
+  - name: Configure NGINX
+    copy:
+      src: nginx.conf
+      dest: /etc/nginx/sites-available/myproject
+      mode: '0644'
+    notify:
+      - Restart NGINX
+      
+  - name: Enable NGINX site
+    file:
+      src: /etc/nginx/sites-available/myproject
+      dest: /etc/nginx/sites-enabled/myproject
+      state: link
+      
+  - name: Restart NGINX
+    service:
+      name: nginx
+      state: restarted
+      
+  - name: Configure Redis
+    copy:
+      src: redis.conf
+      dest: /etc/redis/redis.conf
+      mode: '0644'
+    notify:
+      - Restart Redis
+      
+  - name: Restart Redis
+    service:
+      name: redis-server
+      state: restarted
+      
+  - name: Build Docker image
+    docker_image:
+      name: myimage
+      path: /opt/myproject
+      state: present
+      
+  - name: Start Docker container
+    docker_container:
+      name: mycontainer
+      image: myimage
+      ports:
+        - "8000:8000"
+
