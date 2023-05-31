@@ -1,0 +1,10 @@
+---
+- name: Pull Git code
+  hosts: your_host
+  tasks:
+    - name: Clone or pull Git repository
+      git:
+        repo: https://github.com/4-sure/configuration-management.git
+        dest: /path/to/destination
+        version: master
+        update: yes
