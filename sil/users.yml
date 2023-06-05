@@ -1,0 +1,148 @@
+---  
+- name: add users
+  hosts: sil
+  become: yes
+  roles:
+    - weareinteractive.users
+  vars:
+    users:
+      - username: tester
+        home: /home/tester
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'devops/ktshuma.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: asimpson
+        home: /home/asimpson
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/asimpson.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: bndhlovu
+        home: /home/bndhlovu
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/bndhlovu.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: ksingh
+        home: /home/ksingh
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/ksingh.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: lgreenberg
+        home: /home/lgreenberg
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/lgreenberg.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: msmit
+        home: /home/msmit
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/msmit.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: nmafu
+        home: /home/nmafu
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/nmafu.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: motheom
+        home: /home/motheom
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/motheom.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: pauloj
+        home: /home/pauloj
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/pauloj.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: kevinv
+        home: /home/kevinv
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/kevinv.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: phumlanig
+        home: /home/phumlanig
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/phumlanig.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: tendaim
+        home: /home/tendaim
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'backend/tendaim.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+      - username: jmugabe
+        home: /home/jmugabe
+        groups:
+          - sudo
+        authorized_keys:
+          - "{{ lookup('file', 'devops/jmugabe.pub') }}"
+        user_create: yes
+        home_create: yes
+        home_mode: "0750"
+        shell: /bin/bash
+   #   - username: vukosin
+    #    home: /home/vukosin
+     #   groups:
+      #    - sudo
+       # authorized_keys:
+        #  - "{{ lookup('file', 'backend/vukosin.pub') }}"
+        #user_create: yes
+        #home_create: yes
+        #home_mode: "0750"
+        #shell: /bin/bash
