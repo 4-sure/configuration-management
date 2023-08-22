@@ -1,6 +1,6 @@
 ---
 - name: Create django environment directory
-  hosts: your_host
+  hosts: all
   vars:
     environment: your_environment
   tasks:
