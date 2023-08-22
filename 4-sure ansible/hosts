@@ -1,0 +1,21 @@
+[all]
+ansible_python_interpreter=/usr/bin/python2.7
+builds.4-sure.net				ansible_ssh_user=devops
+bettersure-stats.4-sure.net		ansible_ssh_user=devops
+game.stats.4-sure.net		ansible_ssh_user=devops
+builders-stats.4-sure.net	ansible_ssh_user=devops
+sildev.4-sure.net		ansible_ssh_user=devops
+sil.4-sure.net			ansible_ssh_user=devops
+builders.4-sure.net  ansible_ssh_user=devops
+brolink.4-sure.net   ansible_ssh_user=devops
+santam.4-sure.net    ansible_ssh_user=devops
+game.4-sure.net		 ansible_ssh_user=devops
+silstats.4-sure.net     ansible_ssh_user=devops
+stats.pinggo.co.za   	 ansible_ssh_user=devops
+app.pinggo.co.za 		 ansible_ssh_user=devops
+keycloak.4-sure.net 	ansible_ssh_user=devops
+voucher.4-sure.net 		ansible_ssh_user=devops
+multichoice.stats.4-sure.net ansible_ssh_user=devops
+multichoice.4-sure.net  ansible_ssh_user=devops
+
+
