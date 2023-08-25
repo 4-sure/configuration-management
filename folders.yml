@@ -1,0 +1,23 @@
+- hosts: all
+  become: yes
+  
+  tasks:
+    - name: Create /prod/ folders
+      file:
+        path: /prod/{{ item }}
+        state: directory
+      with_items:
+        - folder1
+        - folder2
+        - folder3
+    
+    - name: Assign relevant permissions
+      file:
+        path: /prod/{{ item }}
+        owner: username
+        group: groupname
+        mode: "0755"
+      with_items:
+        - folder1
+        - folder2
+        - folder3

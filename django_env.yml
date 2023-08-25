@@ -1,0 +1,10 @@
+---
+- name: Create django environment directory
+  hosts: all
+  vars:
+    environment: your_environment
+  tasks:
+    - name: Create django environment directory
+      file:
+        path: "/prod/django_{{ environment }}"
+        state: directory
